@@ -1,4 +1,4 @@
-package com.selenium_java_example;
+package settings;
 
 public class ConsoleColors {
     // Reset

@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="selenium_java_course">
+    <test name="TestSets">
+        <classes>
+            <class name="TestSets.TestSet1">
+                <methods>
+                    <exclude name="test1"/>
+                    <include name="TestCase1"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

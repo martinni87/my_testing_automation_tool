@@ -1,14 +1,19 @@
-package com.selenium_java_example;
+package settings;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import static com.selenium_java_example.Main.print;
+import java.time.Duration;
 
-public class WebDriverConfig {
+import static java.time.temporal.ChronoUnit.MILLIS;
+import static settings.Utils.print;
+
+public class WebDriverContext {
     // Drivers available
     public WebDriver driver;
+
+    // Console messages
     String startingMsg = ConsoleColors.GREEN + """
             ################ MARTIN'S AUTOMATION TOOL ################
             Welcome to Martin's Automation tool
@@ -17,6 +22,7 @@ public class WebDriverConfig {
             Enjoy!
             """ + ConsoleColors.RESET;
     String endingMsg = ConsoleColors.GREEN + """
+            
             -----------------------------------------------
             Thanks for using Martin's Automation Tool
             ################ TEST FINISHED ################
@@ -25,12 +31,13 @@ public class WebDriverConfig {
     /**
      * @param driver could be "Chrome", "Firefox", or "Edge"
      */
-    public WebDriverConfig(String driver) {
+    public WebDriverContext(String driver) {
         print(this.startingMsg);
         switch (driver) {
             case "Chrome":
                 System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
                 this.driver = new ChromeDriver();
+                this.driver.manage().timeouts().implicitlyWait(Duration.of(5000,MILLIS));
                 break;
             case "Firefox":
                 System.out.println("Pending Firefox configuration");
@@ -45,9 +52,9 @@ public class WebDriverConfig {
 
     /**
      * @param driver    could be "Chrome", "Firefox", or "Edge"
-     * @param incognito "incognito"
+     * @param incognito "incognito" parameter for the browser. True or false
      */
-    public WebDriverConfig(String driver, Boolean incognito) {
+    public WebDriverContext(String driver, Boolean incognito) {
         print(this.startingMsg);
         switch (driver) {
             case "Chrome":
@@ -58,6 +65,7 @@ public class WebDriverConfig {
                 }
                 options.addArguments("start-maximized");
                 this.driver = new ChromeDriver(options);
+                this.driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000)); // Implicit wait of 10 seconds
                 break;
             case "Firefox":
                 System.out.println("Pending Firefox configuration");
